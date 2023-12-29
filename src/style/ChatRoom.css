@@ -1,0 +1,9 @@
+.chat-send-prompt{
+    padding-top: 30px;
+    padding-bottom: 40px;
+}
+
+.chat-send-prompt-input{
+    border-radius: 50px;
+    background-color: #C3C7CE; opacity : 0.2;
+}

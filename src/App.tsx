@@ -1,8 +1,9 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import NavigationBar from "./components/NavigationBar";
 import { useEffect } from "react";
 
 function App() {
+  const {pathname} = useLocation();
   const setScreenSize = () => {
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty("--vh", `${vh}px`);
@@ -16,7 +17,7 @@ function App() {
       <main className="pb-[95px]">
         <Outlet />
       </main>
-      <NavigationBar />
+      {pathname !== "/chat" && <NavigationBar />}
     </div>
   );
 }
