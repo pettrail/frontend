@@ -3,11 +3,22 @@ import Button from "../components/Button";
 import LetterBox from "../assets/images/LetterBox.png";
 import BallPool from "../components/BallPool";
 import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { nameState } from "../atom/basicInfo";
+import { redirect, useNavigate } from "react-router-dom";
 
 function Home() {
   let [loaded, setLoaded] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    if (
+      !localStorage.getItem("name") ||
+      localStorage.getItem("name")?.length === 0
+    ) {
+      console.log("test");
+      navigate("/signin");
+    }
     let timer = setTimeout(() => {
       setLoaded(true);
     }, 250);
@@ -26,7 +37,8 @@ function Home() {
             label="추억 생성 1일 차"
           />
           <div className="mt-1 text-center w-2/3 font-semibold text-base break-keep">
-            {"후추"}와 새로운 추억을 쌓기까지 1시간 남았어요.
+            {localStorage.getItem("petName")}와 새로운 추억을 쌓기까지 1시간
+            남았어요.
           </div>
         </div>
 

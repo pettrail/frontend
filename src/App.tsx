@@ -1,6 +1,8 @@
 import { Outlet, useLocation } from "react-router-dom";
 import NavigationBar from "./components/NavigationBar";
 import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { nameState, petNameState } from "./atom/basicInfo";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState<boolean>(
@@ -16,13 +18,15 @@ function App() {
   useEffect(() => {
     setScreenSize();
   });
+
   return (
     <div className="h-full mx-auto mobile:max-w-[500px] border bg-gray-50 relative overflow-hidden overscroll-y-none">
-      <main className="border-box h-full p-3 pb-[95px] mobile:px-4 mobile:pt-4">
+      <main className="border-box h-full p-3 pb-[5rem] mobile:px-4 mobile:pt-4">
         <Outlet />
       </main>
-      {/* <NavigationBar /> */}
-      {/* {(loggedIn && (pathname !== "/chat") && <NavigationBar />} */}
+      {localStorage.getItem("name") &&
+        localStorage.getItem("name")?.length !== 0 &&
+        pathname !== "/chat" && <NavigationBar />}
     </div>
   );
 }

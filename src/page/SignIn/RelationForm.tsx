@@ -46,7 +46,7 @@ function RelationForm({ pageIdx, setPageIdx }: IRelationForm) {
           if (pageIdx < 2 && isValid) {
             setPageIdx((prev) => prev + 1);
             const { relation } = getValues();
-            localStorage.setItem("realtion", relation);
+            localStorage.setItem("relation", relation);
           }
         }}
         width="w-full"
