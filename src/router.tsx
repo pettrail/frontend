@@ -4,6 +4,7 @@ import Splash from "./page/Splash";
 import Home from "./page/Home";
 import ChatRoom from "./page/ChatRoom";
 import { createBrowserRouter } from "react-router-dom";
+import Memorial from "./page/Memorial";
 
 export const router = createBrowserRouter([
   {
@@ -15,6 +16,7 @@ export const router = createBrowserRouter([
       { path: "home", element: <Home /> },
       { path: "gallery", element: <Gallery /> },
       { path: "chat", element: <ChatRoom /> },
+      { path: "memorial", element: <Memorial /> },
     ],
   },
 ]);
