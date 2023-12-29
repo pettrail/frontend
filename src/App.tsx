@@ -1,11 +1,22 @@
 import { Outlet } from "react-router-dom";
+import NavigationBar from "./components/NavigationBar";
+import { useEffect } from "react";
 
 function App() {
+  const setScreenSize = () => {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+  };
+
+  useEffect(() => {
+    setScreenSize();
+  });
   return (
-    <div className="w-full h-full">
-      <main className="h-full mx-auto mobile:max-w-[500px] border bg-gray-50">
+    <div className="h-full mx-auto mobile:max-w-[500px] border bg-gray-50 relative overflow-hidden overscroll-y-none">
+      <main className="pb-[95px]">
         <Outlet />
       </main>
+      <NavigationBar />
     </div>
   );
 }
