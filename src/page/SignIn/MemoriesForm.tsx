@@ -8,16 +8,19 @@ interface IMemoriesForm {
 }
 
 interface IMemoriesInputs {
-  relation: string;
+  memories: string;
 }
 
 function MemoriesForm({ pageIdx, setPageIdx }: IMemoriesForm) {
   const {
     register,
-    handleSubmit,
-    watch,
-    formState: { errors, isValid },
-  } = useForm<IMemoriesInputs>();
+    getValues,
+    formState: { isValid },
+  } = useForm<IMemoriesInputs>({
+    defaultValues: {
+      memories: localStorage.getItem("memories") ?? undefined,
+    },
+  });
 
   return (
     <form className="mt-10 space-y-5">
@@ -30,6 +33,7 @@ function MemoriesForm({ pageIdx, setPageIdx }: IMemoriesForm) {
           많아져요.
         </label>
         <textarea
+          {...register("memories", { required: true })}
           id="relation"
           rows={4}
           className="box-border block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"
@@ -49,14 +53,13 @@ function MemoriesForm({ pageIdx, setPageIdx }: IMemoriesForm) {
       <Button
         onClick={(e) => {
           e.preventDefault();
-          console.log(isValid);
           if (pageIdx < 2 && isValid) {
             setPageIdx((prev) => prev + 1);
           }
         }}
         width="w-full"
         color={isValid ? "bg-primary" : "bg-secondaryGray"}
-        text="다음"
+        text="확인"
         py="py-3"
         fontSize="text-sm"
       />

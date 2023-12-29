@@ -14,10 +14,13 @@ interface IRelationInputs {
 function RelationForm({ pageIdx, setPageIdx }: IRelationForm) {
   const {
     register,
-    handleSubmit,
-    watch,
-    formState: { errors, isValid },
-  } = useForm<IRelationInputs>();
+    getValues,
+    formState: { isValid },
+  } = useForm<IRelationInputs>({
+    defaultValues: {
+      relation: localStorage.getItem("relation") ?? undefined,
+    },
+  });
 
   return (
     <form className="mt-10 space-y-5">
@@ -40,9 +43,10 @@ function RelationForm({ pageIdx, setPageIdx }: IRelationForm) {
       <Button
         onClick={(e) => {
           e.preventDefault();
-          console.log(isValid);
           if (pageIdx < 2 && isValid) {
             setPageIdx((prev) => prev + 1);
+            const { relation } = getValues();
+            localStorage.setItem("realtion", relation);
           }
         }}
         width="w-full"

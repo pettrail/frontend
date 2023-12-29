@@ -25,3 +25,37 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+/* .chat-send-prompt {
+  padding-top: 30px;
+  padding-bottom: 40px;
+}
+
+.chat-send-prompt-input {
+  border-radius: 50px;
+  background-color: #c3c7ce;
+  opacity: 0.2;
+} */
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #e5e7eb transparent;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+  padding: 0 100px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(229, 231, 235, 0.7);
+  border-radius: 10px;
+  border: 2px solid transparent;
+}
