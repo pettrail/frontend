@@ -29,7 +29,9 @@ function Button({
             width ? width : ""
           } text-white font-medium rounded-md ${
             fontSize ? fontSize : "text-xs"
-          } ${py ? py : "py-2"}`}
+          } ${
+            py ? py : "py-2"
+          } hover:bg-primary transition ease-in duration-200`}
         >
           {text}
         </Link>
@@ -40,7 +42,9 @@ function Button({
             width ? width : ""
           } text-white font-medium rounded-md z-50 ${
             fontSize ? fontSize : "text-xs"
-          } ${py ? py : "py-2"}`}
+          } ${
+            py ? py : "py-2"
+          } hover:bg-primary transition ease-in duration-200`}
         >
           {text}
         </button>

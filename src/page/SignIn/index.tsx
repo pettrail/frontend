@@ -41,14 +41,14 @@ function SignIn() {
   return (
     <>
       <div className="flex flex-col h-full justify-center">
-        <header className="flex items-center p-1.5 border">
+        <header className="flex items-center -pl-3 py-1.5">
           <button
             onClick={() => {
               if (pageIdx > 0) {
                 setPageIdx((prev) => prev - 1);
               }
             }}
-            className="border w-7 h-7"
+            className="w-7 h-7"
           >
             {pageIdx !== 0 && <GoChevronLeft className="w-full h-full" />}
           </button>

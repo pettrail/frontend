@@ -16,10 +16,15 @@ interface IBasicInfoInputs {
 function BasicInfoForm({ pageIdx, setPageIdx }: IBasicInfoForm) {
   const {
     register,
-    handleSubmit,
-    watch,
-    formState: { errors, isValid },
-  } = useForm<IBasicInfoInputs>();
+    getValues,
+    formState: { isValid },
+  } = useForm<IBasicInfoInputs>({
+    defaultValues: {
+      name: localStorage.getItem("name") ?? undefined,
+      petName: localStorage.getItem("petName") ?? undefined,
+      petGender: localStorage.getItem("petGender") ?? undefined,
+    },
+  });
 
   return (
     <form className="mt-10 space-y-5">
@@ -96,9 +101,12 @@ function BasicInfoForm({ pageIdx, setPageIdx }: IBasicInfoForm) {
       <Button
         onClick={(e) => {
           e.preventDefault();
-          console.log(isValid);
           if (pageIdx < 2 && isValid) {
             setPageIdx((prev) => prev + 1);
+            const formValues = getValues();
+            Object.entries(formValues).map(([key, value]) =>
+              localStorage.setItem(key, value)
+            );
           }
         }}
         width="w-full"

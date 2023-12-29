@@ -1,10 +1,10 @@
 import App from "./App";
 import Gallery from "./page/Gallery";
 import Home from "./page/Home";
-import ChatRoom from "./page/ChatRoom";
 import { createBrowserRouter } from "react-router-dom";
 import Memorial from "./page/Memorial";
 import SignIn from "./page/SignIn";
+import ChatRoom from "./page/ChatRoom";
 
 export const router = createBrowserRouter([
   {

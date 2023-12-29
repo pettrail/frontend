@@ -14,7 +14,7 @@ function Home() {
   });
 
   return (
-    <div className="border flex flex-col justify-center items-center h-full">
+    <div className="flex flex-col justify-center items-center h-full">
       <span className="mb-5 text-sm font-semibold text-gray-800">
         이터널 채팅 시작하기
       </span>
