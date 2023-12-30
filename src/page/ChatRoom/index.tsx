@@ -30,7 +30,10 @@ function ChatRoom() {
   const [petHistoryDataList, setPetHistoryDataList] = useRecoilState(
     petHistoryDataListAtom
   );
-  const petId = 1;
+  const petId =
+    localStorage.getItem("petId") && localStorage.getItem("petId")?.length !== 0
+      ? parseInt(localStorage.getItem("petId")!!)
+      : 1;
 
   useEffect(() => {
     getPetEnded(petId)
@@ -71,9 +74,9 @@ function ChatRoom() {
           console.log(res);
           setPetHistoryDataList((prev) => [...prev, ...res]);
           console.log("test");
-          reset();
         })
         .catch(() => {});
+      reset();
     }
   };
 
@@ -124,8 +127,8 @@ function ChatRoom() {
             </div>
           ))}
         </div>
-        {/* 메세지 입력창 */}
       </div>
+      {/* 메세지 입력창 */}
       <ChatInput
         register={register}
         isValid={isValid}

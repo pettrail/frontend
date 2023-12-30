@@ -94,16 +94,33 @@ function MemoriesForm({ pageIdx, setPageIdx }: IMemoriesForm) {
             // petInfoForm.append("name", localStorage.getItem("petName")!!);
             // petInfoForm.append("feature", memories);
 
-            const data = {
-              petInfo: {
-                petType: "DOG",
-                name: localStorage.getItem("petName"),
-                feature: memories,
-              },
-              petImage: fileList,
+            const formData = new FormData();
+
+            // const data = {
+            //   petInfo: {
+            //     petType: "DOG",
+            //     name: localStorage.getItem("petName"),
+            //     feature: memories,
+            //   },
+            //   petImage: fileList,
+            // };
+
+            const petInfo = {
+              petType: "DOG",
+              name: localStorage.getItem("petName"),
+              feature: memories,
             };
-            // const petId = await postPetInfo(data);
-            navigate("/");
+
+            const petInfoBlob = new Blob([JSON.stringify(petInfo)], {
+              type: "application/json",
+            });
+            formData.append("petInfo", petInfoBlob);
+            formData.append("petImage", fileList[0]);
+            const petId = await postPetInfo(formData);
+            if (petId && typeof petId === "number") {
+              localStorage.setItem("petId", petId.toString());
+              navigate("/");
+            }
           }
         }}
         width="w-full"

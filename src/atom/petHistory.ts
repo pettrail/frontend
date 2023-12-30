@@ -1,26 +1,27 @@
 // import { atom } from 'recoil';
 
 import { atom } from "recoil";
+import { PetGalleryData } from "../services/pet/getPetGallery";
 
 export const currentAddressNumAtom = atom<number>({
-  key: 'currentAddressNum',
+  key: "currentAddressNum",
   default: 0,
 });
 
 export interface petHistoryData {
-    petHistoryId: number,
-    content: string,
-    createdAt: string,
-    mediaType: string,
-    name: string,
-    objectType: string,
-    wished: boolean
+  petHistoryId: number;
+  content: string;
+  createdAt: string;
+  mediaType: string;
+  name: string;
+  objectType: string;
+  wished: boolean;
 }
 
 export const petHistoryDataListAtom = atom<petHistoryData[]>({
-    key: 'petHistoryDataList',
-    default: [],
-  });
+  key: "petHistoryDataList",
+  default: [],
+});
 
 // export const editRegistrationModeAtom = atom<boolean>({
 //   key: 'editRegistrationMode',
@@ -66,3 +67,8 @@ export const petHistoryDataListAtom = atom<petHistoryData[]>({
 //   key: 'addressList',
 //   default: [],
 // });
+
+export const petGalleryDataListAtom = atom<PetGalleryData[]>({
+  key: "petGalleryDataList",
+  default: [],
+});
