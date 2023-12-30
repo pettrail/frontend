@@ -1,17 +1,25 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import Button from "../../components/Button";
 import { useForm } from "react-hook-form";
+import ImportImages from "../../components/ImportImages";
+import { postPetInfo } from "../../services/pet/postPetInfo";
+import { nameState, petNameState } from "../../atom/basicInfo";
+import { useRecoilState } from "recoil";
+import { useNavigate } from "react-router-dom";
 
 interface IMemoriesForm {
   pageIdx: number;
   setPageIdx: Dispatch<SetStateAction<number>>;
 }
 
-interface IMemoriesInputs {
+export interface IMemoriesInputs {
   memories: string;
 }
 
 function MemoriesForm({ pageIdx, setPageIdx }: IMemoriesForm) {
+  const navigate = useNavigate();
+  const [name, setName] = useRecoilState(nameState);
+  const [petName, setPetName] = useRecoilState(petNameState);
   const {
     register,
     getValues,
@@ -21,6 +29,10 @@ function MemoriesForm({ pageIdx, setPageIdx }: IMemoriesForm) {
       memories: localStorage.getItem("memories") ?? undefined,
     },
   });
+
+  const [showImages, setShowImages] = useState<string[]>([]);
+  const [fileList, setFileList] = useState<File[] | null>(null);
+  const [error, setError] = useState<string>("");
 
   return (
     <form className="mt-10 space-y-5">
@@ -42,23 +54,62 @@ function MemoriesForm({ pageIdx, setPageIdx }: IMemoriesForm) {
       </div>
 
       <div>
-        <label
-          htmlFor="relation"
-          className="block text-sm font-medium text-gray-900 mb-2"
-        >
+        <span className="block text-sm font-medium text-gray-900 mb-2">
           반려동물의 사진을 최소 5장 이상 첨부해주세요
-        </label>
+        </span>
+        <ImportImages
+          fileList={fileList}
+          setFileList={setFileList}
+          showImages={showImages}
+          setShowImages={setShowImages}
+          error={error}
+          setError={setError}
+        />
       </div>
 
       <Button
-        onClick={(e) => {
+        onClick={async (e) => {
           e.preventDefault();
-          if (pageIdx < 2 && isValid) {
-            setPageIdx((prev) => prev + 1);
+          const { memories } = getValues();
+          localStorage.setItem("memories", memories);
+          if (
+            localStorage.getItem("petName")?.length !== 0 &&
+            memories.length !== 0 &&
+            fileList &&
+            fileList.length === 5
+          ) {
+            // const form = new FormData();
+            // const petInfoForm = new FormData();
+            // form.append("petInfo", petInfoForm);
+            // form.append(
+            //   "petImage",
+            //   new Blob([
+            //     fileList[0],
+            //     fileList[1],
+            //     fileList[2],
+            //     fileList[3],
+            //     fileList[4],
+            //   ])
+            // );
+            // petInfoForm.append("name", localStorage.getItem("petName")!!);
+            // petInfoForm.append("feature", memories);
+
+            const data = {
+              petInfo: {
+                petType: "DOG",
+                name: localStorage.getItem("petName"),
+                feature: memories,
+              },
+              petImage: fileList,
+            };
+            // const petId = await postPetInfo(data);
+            navigate("/");
           }
         }}
         width="w-full"
-        color={isValid ? "bg-primary" : "bg-secondaryGray"}
+        color={
+          isValid && fileList?.length === 5 ? "bg-primary" : "bg-secondaryGray"
+        }
         text="확인"
         py="py-3"
         fontSize="text-sm"

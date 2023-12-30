@@ -4,6 +4,7 @@ import { GoChevronLeft } from "react-icons/go";
 import RelationForm from "./RelationForm";
 import BasicInfoForm from "./BasicInfoForm";
 import MemoriesForm from "./MemoriesForm";
+import { useForm } from "react-hook-form";
 
 interface ISignInPage {
   title: string;
