@@ -18,7 +18,7 @@ const PhotoCard: React.FC<PetGalleryProps> = ({ petGalleryData }) => {
             alt="petImage"
             src={petGalleryData?.imageUrl}
           />
-          <div className="mt-3 flex flex-col items-center space-y-0.5">
+          <div className="mt-3 flex flex-col items-center space-y-0.5 shrink-0">
             <Badge
               bgColor="bg-primaryLight"
               textColor="text-primary"
@@ -39,7 +39,7 @@ const PhotoCard: React.FC<PetGalleryProps> = ({ petGalleryData }) => {
         <div className="shrink-0 h-[27.5rem] w-72 bg-white rounded-lg p-3">
           <div className="relative">
             <img
-              className="h-[20rem] w-full object-cover object-center rounded-lg"
+              className="h-[18rem] w-full object-cover object-center rounded-lg"
               alt="petImage"
               src={DummyImage}
             />
@@ -48,7 +48,7 @@ const PhotoCard: React.FC<PetGalleryProps> = ({ petGalleryData }) => {
             </div>
           </div>
 
-          <div className="mt-3 flex flex-col items-center space-y-0.5">
+          <div className="mt-3 flex flex-col items-center space-y-0.5 shrink-0">
             <Badge
               bgColor="bg-primaryLight"
               textColor="text-primary"
@@ -56,7 +56,11 @@ const PhotoCard: React.FC<PetGalleryProps> = ({ petGalleryData }) => {
             />
             <div className="text-lg font-medium">????년 ??월 ??일</div>
             <div>저장된 포토카드가 없어요!</div>
-            <Button color="bg-primary" text="추억 돌아보기" width="w-full" />
+            <Button
+              color="bg-secondaryGray"
+              text="추억 돌아보기"
+              width="w-full"
+            />
           </div>
         </div>
       )}

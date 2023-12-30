@@ -66,3 +66,12 @@ img {
   -ms-user-select: none;
   user-select: none;
 }
+
+.bg-splash {
+  background: linear-gradient(
+    rgba(161, 165, 255, 1),
+    rgb(174, 178, 255, 0.45),
+    rgb(189, 192, 255),
+    rgb(189, 192, 255, 0.81)
+  );
+}
